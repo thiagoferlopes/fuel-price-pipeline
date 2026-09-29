@@ -19,7 +19,7 @@ def download_arquivo(ano, semestre):
             logging.info(f'Download completo: data/raw/ca-{ano}-{semestre:02d}.zip')
         else:
             logging.error(f'Falha no download do arquivo: ca-{ano}-{semestre:02d}.zip. Status code: {response.status_code}')
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         logging.error(f'Erro ao tentar baixar o arquivo: ca-{ano}-{semestre:02d}.zip. Erro: {e}')
 
 def download_arquivos(ano_inicio, ano_fim):
