@@ -24,9 +24,10 @@ def download_arquivo(ano, semestre):
         if response.status_code == 200:
             logging.info(f'Download em andamento: ca-{ano}-{semestre:02d}.{extensao}')
             os.makedirs('data/raw', exist_ok=True)
-            with open(f'data/raw/ca-{ano}-{semestre:02d}.{extensao}', 'wb') as arquivo_final:
+            with open(f'data/raw/ca-{ano}-{semestre:02d}.{extensao}.tmp', 'wb') as arquivo_final:
                 for chunk in response.iter_content(chunk_size=8192):
                     arquivo_final.write(chunk)
+            os.rename(f'data/raw/ca-{ano}-{semestre:02d}.{extensao}.tmp', f'data/raw/ca-{ano}-{semestre:02d}.{extensao}')
             logging.info(f'Download completo: data/raw/ca-{ano}-{semestre:02d}.{extensao}')
 
         else:
